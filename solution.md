@@ -17,9 +17,8 @@ This is a simple golang application that is listening on port 80 for request, al
 
 ##include diagram
 
-![architecture in AWS](https://drive.google.com/file/d/1SRIBn3V5KKGzQvhXeNiHUh9MhFAVXM70/view?usp=sharing)
+![Architecture in AWS](https://github.com/djgio02/devops-challenge/blob/main/diagram.jpg?raw=true)
 
-Application is live in this link in my own AWS infrastructure: https://koho.gigacorp.link/koho
 
 
 ### Building & Testing
