@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hellogo
+  name: hellogo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hellogo
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: hellogo
+    spec:
+      containers:
+      - image: djgio02/postgres-go:v1
+        name: hellogo
+        ports:
+        - containerPort: 80
+        envFrom:
+          - secretRef:
+              name: dbcon
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hellogo
+  name: hellogo
+  annotations:
+    # Note that the backend talks over HTTP.
+ #   service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    # TODO: Fill in with the ARN of your certificate.
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-2:913337435549:certificate/c96259fd-e3bd-4d94-923a-d803135c79a3
+    # Only run SSL on the port named "https" below.
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+spec:
+  ports:
+  - port: 80
+    name: http
+    protocol: TCP
+    targetPort: 80
+  - port: 443
+    name: https
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: hellogo
+  type: LoadBalancer
+status:
+  loadBalancer: {}
