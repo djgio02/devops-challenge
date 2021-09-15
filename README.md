@@ -1,4 +1,4 @@
-# devops-challenge
+# DevOps Challenge
 This was a challenge interview for a senior devops position.
 
 In this task, you'll write code that provisions a web server and database to the cloud. We will be looking at your skills in the following areas: 
